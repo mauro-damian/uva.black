@@ -2,17 +2,16 @@
 
 export const contacto = {
   // Número en formato internacional, solo dígitos, sin "+" ni espacios. Ej.: 5492611234567
-  whatsapp: '',
-  email: '',
-  instagram: '',
+  whatsapp: '5492616648583',
+  email: 'contacto@uvablack.com.ar',
+  instagram: 'https://www.instagram.com/uvablack/',
   linkedin: '',
   ubicacion: 'Mendoza, Argentina',
 };
 
 export const sitio = {
   nombre: 'Uva Black',
-  // Dominio canónico pendiente de confirmar: https://uvablack.com.ar o https://uvablack.ar
-  url: '',
+  url: 'https://uvablack.com.ar',
 };
 
 export const mensajesWhatsapp = {

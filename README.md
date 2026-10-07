@@ -69,10 +69,12 @@ Esta versión no usa variables `VITE_*`: la configuración vive en `contenido.js
 
 ## Pendientes antes de publicar
 
-- [ ] Número de WhatsApp (`contacto.whatsapp`, formato `549261XXXXXXX`).
-- [ ] Correo destinatario del formulario (`contacto.email`).
-- [ ] URLs de Instagram y LinkedIn (si no se cargan, no se muestran).
-- [ ] Dominio canónico: `uvablack.com.ar` o `uvablack.ar`. Completar `sitio.url` y, en `index.html`, agregar `<link rel="canonical">` y pasar `og:image` a URL absoluta.
+- [x] Número de WhatsApp (`contacto.whatsapp`, formato `549261XXXXXXX`).
+- [x] Correo destinatario del formulario (`contacto.email`): contacto@uvablack.com.ar.
+- [ ] Crear la casilla contacto@uvablack.com.ar (registros MX del dominio).
+- [x] Instagram.
+- [ ] LinkedIn (si no se carga, no se muestra).
+- [x] Dominio canónico: `https://uvablack.com.ar` (canonical y Open Graph en `index.html`).
 - [ ] Fotografías reales: hero (reunión de trabajo), clima (taller o equipo) y equipo de Uva Black.
 - [ ] Integrantes del equipo, si se quieren mostrar.
 - [ ] Revisión final de textos por Uva Black.
