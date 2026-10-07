@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Uva Black · Consultoría en Recursos Humanos en Mendoza</title>
+    <meta
+      name="description"
+      content="Uva Black es una consultora de recursos humanos de Mendoza. Búsqueda y selección de talento, clima organizacional, procesos, liderazgo y capacitación para empresas."
+    />
+    <meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Pendiente: al confirmar el dominio, agregar <link rel="canonical"> y usar URLs absolutas en og:url y og:image. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Uva Black" />
+    <meta property="og:title" content="Uva Black · Personas que impulsan empresas" />
+    <meta
+      property="og:description"
+      content="Consultoría en recursos humanos en Mendoza: talento y selección, y consultoría organizacional."
+    />
+    <meta property="og:image" content="/images/marca/og-uva-black.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Isotipo de Uva Black" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/marca/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/images/marca/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    />
+    <link rel="preload" as="image" href="/images/marca/isotipo.png" />
+
+    <script>
+      (function () {
+        var modo = null;
+        try {
+          modo = localStorage.getItem('uvablack-modo');
+        } catch (e) {}
+        if (modo !== 'light' && modo !== 'dark') {
+          modo = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.style.colorScheme = modo;
+        document.documentElement.style.backgroundColor = modo === 'dark' ? '#141414' : '#F5F5F2';
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>Uva Black · Consultoría en Recursos Humanos en Mendoza. Activá JavaScript para ver el sitio.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

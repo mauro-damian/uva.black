@@ -1,0 +1,7 @@
+Leé primero `01_INSTRUCCIONES/LEER_PRIMERO_CURSOR.md` y después `01_INSTRUCCIONES/Prompt_completo_Uva_Black_Cursor.md`.
+
+Usá todo el material de este paquete como fuente del proyecto. La referencia visual principal es `04_REFERENCIAS/REFERENCIA_VISUAL_PRINCIPAL.png` y el isotipo oficial es `02_MARCA/ICONO_OFICIAL_UVA_BLACK.png`.
+
+IMPORTANTE: no rediseñes, reinterpretes ni modifiques el isotipo. No cambies su forma, ojos ni punto superior derecho.
+
+Construí la landing completa de Uva Black siguiendo el prompt técnico y visual, con React 18 + Vite + MUI 5, JavaScript, responsive desde 360 px, accesible, sin backend y preparada para Docker. No te quedes en wireframes: implementá la página completa.

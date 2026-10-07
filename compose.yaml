@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    image: uva-black-web:latest
+    container_name: uva-black-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped
