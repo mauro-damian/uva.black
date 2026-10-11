@@ -6,6 +6,7 @@ RUN npm ci --no-audit --no-fund
 COPY index.html vite.config.js ./
 COPY public ./public
 COPY src ./src
+COPY scripts ./scripts
 RUN npm run build
 
 # Etapa 2: servidor estático

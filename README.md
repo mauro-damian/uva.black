@@ -82,6 +82,30 @@ El `Dockerfile` tiene dos etapas: Node compila con `npm ci` y `npm run build`, y
 
 **Cualquier cambio de contenido requiere reconstruir**: `docker compose up --build -d`.
 
+## HTML estático y prerender
+
+`npm run build` compila el JavaScript con Vite y después renderiza la aplicación con React en Node durante el build. `scripts/prerender.mjs` incorpora el contenido y los estilos de Emotion en `dist/index.html`; el navegador usa `hydrateRoot` para activar la misma aplicación. No se agrega un servidor Node en producción ni dependencias nuevas.
+
+La única ruta pública actual es `/`, también declarada en `public/sitemap.xml`. `#servicios`, `#nosotros`, `#contacto` y el resto de las anclas pertenecen a ese documento. El prerender conserva todos los metadatos originales de `index.html`, incluidos title, description, canonical y Open Graph. Si se incorporan páginas con rutas propias, habrá que ampliar el prerender y sus metadatos; la verificación del build detecta nuevas rutas en el sitemap.
+
+El HTML inicial contiene las secciones visibles sin JavaScript. El tema guardado, el menú móvil, el formulario y las animaciones se activan al hidratar; los enlaces nativos a secciones, correo y WhatsApp están presentes en el HTML. Los hooks de tema y revelado comparten un estado inicial compatible con el render estático para evitar diferencias de hidratación. Los componentes visuales, textos y estilos no cambian.
+
+### Verificación
+
+```bash
+npm run build
+npm run test:prerender
+npm run preview -- --host 127.0.0.1 --port 5176
+```
+
+`scripts/verificar-prerender.mjs` también se ejecuta automáticamente al compilar: comprueba textos reales de las secciones, los servicios y el contacto en el HTML, los destinos de las anclas y la conservación de los metadatos. Para probar la lectura sin JavaScript, deshabilitalo en el navegador y recargá `http://localhost:5176`.
+
+### Despliegue
+
+- **Docker:** el Dockerfile ahora copia `scripts/` antes de ejecutar `npm run build`. Desplegá con `docker compose up -d --build` una vez integrada esta rama. Nginx, sus puertos, sus cabeceras y su configuración no necesitan cambios.
+- **Hosting estático:** comando de build `npm ci && npm run build`; carpeta publicada `dist/`. No uses `vite build` directamente, porque omite el prerender. Subí el HTML y los assets del mismo build.
+- El render temporal se elimina al terminar y no se publica. El contenido del sitio sigue editándose en `src/data/contenido.js` y requiere un nuevo build para actualizar el HTML servido.
+
 ## Dónde se edita cada cosa
 
 | Qué | Dónde |

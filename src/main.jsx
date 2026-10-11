@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App';
 import { obtenerPendientes } from './data/pendientes';
 
@@ -10,8 +10,15 @@ if (import.meta.env.DEV) {
   }
 }
 
-createRoot(document.getElementById('root')).render(
+const raiz = document.getElementById('root');
+const aplicacion = (
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 );
+
+if (raiz.hasChildNodes()) {
+  hydrateRoot(raiz, aplicacion);
+} else {
+  createRoot(raiz).render(aplicacion);
+}

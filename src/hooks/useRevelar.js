@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useHidratado } from './useHidratado';
 
 function animacionPermitida() {
   if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return false;
@@ -8,6 +9,7 @@ function animacionPermitida() {
 // Devuelve una ref y si el elemento ya entró en pantalla. Sin soporte o con
 // movimiento reducido, el contenido se considera visible desde el inicio.
 export function useRevelar({ umbral = 0.05 } = {}) {
+  const hidratado = useHidratado();
   const ref = useRef(null);
   const [visible, setVisible] = useState(() => !animacionPermitida());
 
@@ -26,5 +28,5 @@ export function useRevelar({ umbral = 0.05 } = {}) {
     return () => observador.disconnect();
   }, [visible, umbral]);
 
-  return [ref, visible];
+  return [ref, !hidratado || visible];
 }

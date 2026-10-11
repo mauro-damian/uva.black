@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { CLAVE_MODO } from '../theme';
+import { useHidratado } from './useHidratado';
 
 const CONSULTA_OSCURO = '(prefers-color-scheme: dark)';
 
@@ -22,10 +23,12 @@ function guardar(modo) {
 }
 
 function modoDelSistema() {
+  if (typeof window === 'undefined') return 'light';
   return window.matchMedia?.(CONSULTA_OSCURO).matches ? 'dark' : 'light';
 }
 
 export function useModoColor() {
+  const hidratado = useHidratado();
   const [elegido, setElegido] = useState(leerGuardado);
   const [sistema, setSistema] = useState(modoDelSistema);
 
@@ -37,7 +40,7 @@ export function useModoColor() {
     return () => consulta.removeEventListener('change', alCambiar);
   }, []);
 
-  const modo = elegido ?? sistema;
+  const modo = hidratado ? (elegido ?? sistema) : 'light';
 
   useEffect(() => {
     document.documentElement.style.colorScheme = modo;
