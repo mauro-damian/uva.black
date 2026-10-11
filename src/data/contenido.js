@@ -47,11 +47,11 @@ export const imagenes = {
     posicion: 'center',
   },
   equipo: {
-    src: '',
-    alt: 'Equipo de Uva Black',
-    ancho: 1600,
-    alto: 1000,
-    posicion: 'center 30%',
+    src: '/images/fotos/uva-black-panorama.png',
+    alt: 'Uva Black RRHH sobre una panorámica de viñedos y la cordillera de los Andes',
+    ancho: 1672,
+    alto: 941,
+    posicion: 'center',
   },
 };
 

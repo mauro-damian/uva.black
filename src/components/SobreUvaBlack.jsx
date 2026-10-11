@@ -79,7 +79,6 @@ export default function SobreUvaBlack() {
         <Foto
           imagen={imagenes.equipo}
           variante="claro"
-          sx={{ aspectRatio: { xs: '4 / 5', sm: '16 / 9', md: '21 / 9' } }}
         />
       </Revelar>
 
