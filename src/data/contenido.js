@@ -247,6 +247,10 @@ export const contactoSeccion = {
 };
 
 export const footer = {
+  cierreEtiqueta: 'El próximo paso, juntos.',
+  cierreCta: 'Conversemos',
+  cierreWhatsapp: 'Hablemos de tu empresa por WhatsApp',
+  cierreContacto: 'Contanos qué necesita tu empresa',
   descripcion: 'Consultoría en Recursos Humanos. Talento, organización y equipos.',
   navegacionTitulo: 'Secciones',
   contactoTitulo: 'Contacto',

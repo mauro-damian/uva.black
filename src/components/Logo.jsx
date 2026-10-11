@@ -16,6 +16,13 @@ export default function Logo({ tamano = 36, href = '#inicio', alNavegar, sx }) {
           color: 'text.primary',
           textDecoration: 'none',
           borderRadius: 1,
+          '@media (prefers-reduced-motion: no-preference)': {
+            '& .uva-isotipo': { transition: 'transform 350ms cubic-bezier(0.2, 0.7, 0.2, 1)' },
+            '&:focus-visible .uva-isotipo': { transform: 'translate(2px, -3px) rotate(9deg)' },
+            '@media (hover: hover)': {
+              '&:hover .uva-isotipo': { transform: 'translate(2px, -3px) rotate(9deg)' },
+            },
+          },
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}

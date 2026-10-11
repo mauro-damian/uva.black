@@ -4,6 +4,28 @@ Landing de una sola página para **Uva Black**, consultora de Recursos Humanos d
 
 React 18 + Vite + MUI 5, en JavaScript. Sin backend: el formulario abre el cliente de correo (mailto) y los botones de WhatsApp usan enlaces `wa.me`.
 
+## Versiones de diseño
+
+- `v1`: diseño original, con título y composición de marca en dos columnas.
+- `v2`: versión actual, con título de gran escala, isotipo interactivo y cierre “Conversemos”. El desarrollo de esta propuesta continúa en esta rama.
+- `main`: base original, sin integrar todavía la propuesta V2.
+
+Antes de cambiar de versión, guardá los cambios pendientes en un commit de su rama. Desde la carpeta del proyecto:
+
+```bash
+git switch v1
+docker compose up -d --build
+```
+
+Para volver a la versión actual:
+
+```bash
+git switch v2
+docker compose up -d --build
+```
+
+Ambas se prueban en `http://localhost:8080`, una por vez. Cambiar de rama no actualiza un contenedor ya construido: hace falta ejecutar la reconstrucción indicada. Estas ramas se mantienen locales hasta publicarlas explícitamente en el remoto.
+
 ## Requisitos
 
 - Node.js 20.11 o superior (probado con 20.11) y npm 10.
@@ -50,7 +72,11 @@ El `Dockerfile` tiene dos etapas: Node compila con `npm ci` y `npm run build`, y
 
 ### Fotografías
 
-Copiá la imagen a `public/images/fotos/` (JPG o WebP, ~1600 px del lado mayor, menos de 300 KB) y completá `src`, `alt`, `ancho` y `alto` en `imagenes`. Mientras `src` esté vacío se muestra una composición con el isotipo. Las fotos se muestran en blanco y negro; `posicion` ajusta el encuadre (`object-position`).
+Copiá la imagen a `public/images/fotos/` (JPG o WebP, ~1600 px del lado mayor, menos de 300 KB) y completá `src`, `alt`, `ancho` y `alto` en `imagenes`. En clima y equipo, mientras `src` esté vacío se muestra una composición con el isotipo. La apertura usa tipografía e isotipo; si se configura `imagenes.hero.src`, la foto aparece debajo en formato panorámico. Las fotos se muestran en blanco y negro; `posicion` ajusta el encuadre (`object-position`).
+
+### Movimiento de marca
+
+`MarcaViva` conserva el isotipo oficial y anima su entrada una vez al aparecer en pantalla. `useMovimientoMarca` agrega una reacción al mouse en la apertura y el cierre, sin interceptar el scroll táctil. Los enlaces de contacto también activan un saludo al recibir foco de teclado. Los efectos respetan `prefers-reduced-motion` y no requieren dependencias adicionales. El cierre grande usa el WhatsApp configurado; sin número, lleva al formulario de contacto. Sus textos están en `footer` dentro de `contenido.js`.
 
 ### Formulario
 

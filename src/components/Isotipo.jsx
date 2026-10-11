@@ -7,6 +7,8 @@ export default function Isotipo({ etiqueta, sx }) {
 
   return (
     <Box
+      component="span"
+      className="uva-isotipo"
       {...accesible}
       sx={[
         {

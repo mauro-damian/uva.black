@@ -146,8 +146,10 @@ export function crearTema(modo) {
           html: { scrollBehavior: 'auto' },
           '*, *::before, *::after': {
             animationDuration: '0.01ms !important',
+            animationDelay: '0ms !important',
             animationIterationCount: '1 !important',
             transitionDuration: '0.01ms !important',
+            transitionDelay: '0ms !important',
           },
         },
       },
@@ -176,11 +178,15 @@ export function crearTema(modo) {
           minHeight: 48,
           paddingInline: 22,
           borderRadius: 999,
-          transition: 'background-color 200ms ease, color 200ms ease, border-color 200ms ease',
+          transition: 'background-color 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease',
+          '@media (hover: hover) and (prefers-reduced-motion: no-preference)': {
+            '&:hover': { transform: 'translateY(-2px)' },
+            '&:active': { transform: 'translateY(0)' },
+          },
           '& .MuiButton-endIcon': {
             transition: 'transform 200ms ease',
           },
-          '&:hover .MuiButton-endIcon': {
+          '&:hover .MuiButton-endIcon, &:focus-visible .MuiButton-endIcon': {
             transform: 'translateX(3px)',
           },
           '&.Mui-focusVisible': foco,

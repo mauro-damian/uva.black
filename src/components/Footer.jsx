@@ -4,20 +4,64 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import NorthEast from '@mui/icons-material/NorthEast';
 import Isotipo from './Isotipo';
+import MarcaViva from './MarcaViva';
+import Revelar from './Revelar';
 import Logo from './Logo';
 import RedesSociales from './RedesSociales';
 import TemaInverso from './TemaInverso';
 import { contacto, footer, navegacion } from '../data/contenido';
 import { enlaceWhatsapp } from '../services/contacto';
+import { useMovimientoMarca } from '../hooks/useMovimientoMarca';
 
 function Contenido() {
   const anio = new Date().getFullYear();
   const whatsapp = enlaceWhatsapp();
+  const refCierre = useMovimientoMarca(true);
 
   return (
     <Box component="footer" sx={{ position: 'relative', overflow: 'hidden', bgcolor: 'background.default', color: 'text.primary', pt: { xs: 9, md: 12 }, pb: 4 }}>
       <Container>
+        <Revelar sx={{ mb: { xs: 7, md: 10 } }}>
+          <Box
+            ref={refCierre}
+            component="a"
+            className="cierre-contacto"
+            href={whatsapp || '#contacto'}
+            {...(whatsapp ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            sx={{
+              display: 'block', color: 'text.primary', textDecoration: 'none',
+              borderBottom: 1, borderColor: 'uva.lineaFuerte', pb: { xs: 4, md: 6 },
+              '& .cierre-flecha': { transition: 'transform 400ms ease, background-color 250ms ease, color 250ms ease' },
+              '&:focus-visible': { '--marca-saludo': '18deg', '--marca-salto': '-14px' },
+              '&:focus-visible .cierre-flecha': { bgcolor: 'text.primary', color: 'background.default' },
+              '@media (hover: hover)': {
+                '&:hover': { '--marca-saludo': '18deg', '--marca-salto': '-14px' },
+                '&:hover .cierre-flecha': { bgcolor: 'text.primary', color: 'background.default' },
+              },
+              '@media (hover: hover) and (prefers-reduced-motion: no-preference)': {
+                '&:hover .cierre-flecha': { transform: 'rotate(45deg)' },
+              },
+            }}
+          >
+            <Box component="span" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 3, mb: { xs: 3, md: 4 }, pr: { xs: 2, md: 5 } }}>
+              <Typography component="span" variant="overline" sx={{ color: 'text.secondary', maxWidth: '24ch' }}>{footer.cierreEtiqueta}</Typography>
+              <MarcaViva sx={{ width: { xs: 72, sm: 110, md: 150 } }} />
+            </Box>
+            <Box component="span" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: { xs: 1.5, md: 4 } }}>
+              <Typography component="span" sx={{ fontWeight: 800, fontSize: 'clamp(1.9rem, 8.7vw, 8rem)', letterSpacing: '-0.06em', lineHeight: 1.1 }}>
+                {footer.cierreCta}
+              </Typography>
+              <Box component="span" className="cierre-flecha" sx={{ width: { xs: 44, sm: 72, md: 110 }, aspectRatio: '1', border: 1, borderColor: 'uva.lineaFuerte', borderRadius: '50%', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                <NorthEast aria-hidden sx={{ fontSize: { xs: 26, sm: 40, md: 56 } }} />
+              </Box>
+            </Box>
+            <Typography component="span" variant="body2" sx={{ display: 'block', color: 'text.secondary', mt: 3 }}>
+              {whatsapp ? footer.cierreWhatsapp : footer.cierreContacto}
+            </Typography>
+          </Box>
+        </Revelar>
         <Grid container spacing={{ xs: 6, md: 4 }}>
           <Grid item xs={12} md={5}>
             <Logo tamano={48} />
@@ -49,7 +93,7 @@ function Contenido() {
                   WhatsApp
                 </Link>
               )}
-              {contacto.email && <Link href={`mailto:${contacto.email}`}>{contacto.email}</Link>}
+              {contacto.email && <Link href={`mailto:${contacto.email}`} sx={{ overflowWrap: 'anywhere' }}>{contacto.email}</Link>}
               <RedesSociales />
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {contacto.ubicacion}

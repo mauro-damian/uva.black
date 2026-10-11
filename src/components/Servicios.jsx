@@ -42,11 +42,27 @@ function Tarjeta({ id, tarjeta, ancha }) {
         borderColor: 'divider',
         borderRadius: 1,
         p: { xs: 3, md: ancha ? 5 : 4 },
+        position: 'relative',
+        overflow: 'hidden',
         transition: 'border-color 220ms ease, transform 220ms ease',
-        '&:hover': { borderColor: 'text.primary', transform: 'translateY(-2px)' },
+        '&::after': {
+          content: '""', position: 'absolute', bottom: 0, left: 0, right: 0,
+          height: 2, bgcolor: 'text.primary', transform: 'scaleX(0)',
+          transformOrigin: 'left', transition: 'transform 350ms ease',
+        },
+        '@media (hover: hover)': {
+          '&:hover': { borderColor: 'text.primary' },
+          '&:hover::after': { transform: 'scaleX(1)' },
+          '&:hover .servicio-icono': { bgcolor: 'text.primary', color: 'background.default', borderColor: 'text.primary' },
+        },
+        '@media (hover: hover) and (prefers-reduced-motion: no-preference)': {
+          '&:hover': { transform: 'translateY(-4px)' },
+          '&:hover .servicio-icono svg': { transform: 'rotate(-8deg)' },
+        },
       }}
     >
       <Box
+        className="servicio-icono"
         sx={{
           width: 48,
           height: 48,
@@ -56,6 +72,8 @@ function Tarjeta({ id, tarjeta, ancha }) {
           borderColor: 'divider',
           borderRadius: '50%',
           mb: 3,
+          transition: 'background-color 220ms ease, color 220ms ease, border-color 220ms ease',
+          '& svg': { transition: 'transform 300ms ease' },
         }}
       >
         <Icono aria-hidden sx={{ fontSize: 22 }} />

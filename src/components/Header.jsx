@@ -93,7 +93,7 @@ export default function Header({ modo, alAlternarModo }) {
                       transformOrigin: 'right',
                       transition: 'transform 220ms ease',
                     },
-                    '&:hover::after': { transform: 'scaleX(1)', transformOrigin: 'left' },
+                    '&:hover::after, &:focus-visible::after': { transform: 'scaleX(1)', transformOrigin: 'left' },
                   }}
                 >
                   {item.label}
