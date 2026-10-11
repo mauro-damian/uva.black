@@ -4,11 +4,37 @@ Landing de una sola página para **Uva Black**, consultora de Recursos Humanos d
 
 React 18 + Vite + MUI 5, en JavaScript. Sin backend: el formulario abre el cliente de correo (mailto) y los botones de WhatsApp usan enlaces `wa.me`.
 
-## Versiones de diseño
+## Ramas y flujo de trabajo
 
 - `v1`: diseño original, con título y composición de marca en dos columnas.
-- `v2`: versión actual, con título de gran escala, isotipo interactivo y cierre “Conversemos”. El desarrollo de esta propuesta continúa en esta rama.
-- `main`: base original, sin integrar todavía la propuesta V2.
+- `v2`: propuesta con título de gran escala, isotipo interactivo y cierre “Conversemos”.
+- `development`: integración y pruebas de la propuesta elegida. Parte de V2.
+- `main`: versión estable aprobada. Solo recibe cambios probados desde `development`.
+
+Flujo: **rama de propuesta → `development` → pruebas y aprobación → `main`**. Un merge integra código entre ramas; un push sube una rama a GitHub. Subir `development` no modifica `main`.
+
+Para integrar cambios de una propuesta y probarlos:
+
+```bash
+git switch development
+git pull --ff-only origin development
+git merge --no-ff v2
+npm run build
+docker compose up -d --build
+git push origin development
+```
+
+Revisá la web en `http://localhost:8080`, en móvil y escritorio, antes de aprobarla. Una vez aprobada:
+
+```bash
+git switch main
+git pull --ff-only origin main
+git merge --ff-only development
+git push origin main
+git switch development
+```
+
+Si `main` avanzó por otro lado y el merge con `--ff-only` falla, integrá primero `main` en `development`, resolvé los conflictos y repetí las pruebas antes de promoverla. No fuerces el push. Este flujo es una convención del proyecto; no configura protecciones automáticas en GitHub.
 
 Antes de cambiar de versión, guardá los cambios pendientes en un commit de su rama. Desde la carpeta del proyecto:
 
@@ -17,14 +43,14 @@ git switch v1
 docker compose up -d --build
 ```
 
-Para volver a la versión actual:
+Para volver a la rama de pruebas:
 
 ```bash
-git switch v2
+git switch development
 docker compose up -d --build
 ```
 
-Ambas se prueban en `http://localhost:8080`, una por vez. Cambiar de rama no actualiza un contenedor ya construido: hace falta ejecutar la reconstrucción indicada. Estas ramas se mantienen locales hasta publicarlas explícitamente en el remoto.
+Las versiones se prueban en `http://localhost:8080`, una por vez. Cambiar de rama no actualiza un contenedor ya construido: hace falta ejecutar la reconstrucción indicada. GitHub guarda las ramas publicadas mediante push; el despliegue del sitio es una operación aparte.
 
 ## Requisitos
 
