@@ -21,7 +21,9 @@ const esperados = [
 for (const esperado of esperados) assert.ok(texto.includes(esperado), `Falta contenido en el HTML: ${esperado}`);
 assert.equal((cuerpo.match(/<h1\b/g) ?? []).length, 1, 'Debe existir un único H1.');
 assert.ok(!html.includes('Activá JavaScript'), 'El contenido debe estar disponible sin JavaScript.');
-assert.match(html, /<style data-emotion=/, 'Faltan los estilos del HTML estático.');
+const head = html.split('<head>')[1].split('</head>')[0];
+assert.match(head, /<style data-emotion="uva(?:-global)? /, 'Falta el CSS crítico en el head.');
+assert.ok(!cuerpo.includes('data-emotion='), 'El CSS crítico debe estar extraído del cuerpo.');
 assert.match(cuerpo, /href="mailto:contacto@uvablack\.com\.ar"/);
 assert.ok(cuerpo.includes(`https://wa.me/${contacto.whatsapp}`));
 

@@ -1,5 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from './createEmotionCache';
 import App from './App';
 import { obtenerPendientes } from './data/pendientes';
 
@@ -11,9 +13,12 @@ if (import.meta.env.DEV) {
 }
 
 const raiz = document.getElementById('root');
+const cache = createEmotionCache();
 const aplicacion = (
   <StrictMode>
-    <App />
+    <CacheProvider value={cache}>
+      <App />
+    </CacheProvider>
   </StrictMode>
 );
 

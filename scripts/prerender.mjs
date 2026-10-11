@@ -22,7 +22,10 @@ try {
   const plantilla = await readFile(archivo, 'utf8');
   const marcador = '<div id="root"></div>';
   if (!plantilla.includes(marcador)) throw new Error('No se encontró el contenedor vacío para prerenderizar.');
-  const html = plantilla.replace(marcador, () => `<div id="root">${render()}</div>`);
+  const renderizado = render();
+  const html = plantilla
+    .replace('</head>', () => `${renderizado.css}\n  </head>`)
+    .replace(marcador, () => `<div id="root">${renderizado.html}</div>`);
   await writeFile(archivo, html);
   console.log('Prerender: / → dist/index.html (contenido y estilos incluidos).');
 } finally {
